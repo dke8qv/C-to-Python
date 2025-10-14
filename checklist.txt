@@ -1,0 +1,3 @@
+numba.ipynb  (Phys3530+Phys5630) Done
+C-to-Python.ipynb  (Phys3530+Phys5630) 2a done 2b not yet
+cppyy.ipynb (Phys5630 only) 3a done(check) 3b done(check)
