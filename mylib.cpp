@@ -29,6 +29,43 @@ double magnitude(double re, double im){
   return sqrt(re*re+im*im);
 }
 
+double HSVolume(int d, long long N, double r) {
+  // Monte Carlo volume of a d-D hypersphere of radius r, using N pseudorandom points
+  // Method: throw in hypercube [-r, r]^d; volume = (2r)^d * (hits/N)
+  srand48((long)time(NULL));
+  long long hits = 0;
+
+  // quick path: d<=0 or N<=0
+  if (d <= 0 || N <= 0 || r <= 0.0) return 0.0;
+
+  for (long long n = 0; n < N; ++n) {
+    // draw d coords in [-r, r]
+    double rsq = 0.0;
+    for (int k = 0; k < d; ++k) {
+      // uniform in [0,1) then affine-map to [-r, r]
+      double xk = (2.0*drand48() - 1.0) * r;
+      rsq += xk * xk;
+      // early exit if already outside
+      if (rsq > r*r) { // outside
+        // skip the remaining coords
+        // advance loop index quickly
+        for (++k; k < d; ++k) { (void)drand48(); } // consume RNG to keep calls consistent (optional)
+        goto done_point;
+      }
+    }
+    // inside if rsq <= r^2
+    ++hits;
+  done_point:
+    ;
+  }
+
+  // hypercube volume = (2r)^d
+  double vol_hypercube = 1.0;
+  for (int k = 0; k < d; ++k) vol_hypercube *= (2.0 * r);
+  return vol_hypercube * (double)hits / (double)N;
+}
+
+
 
 int mandel_test(double c_re, double c_im, int NTRIALS){  
   // If a point is in the set, its magnitude will remain bounded by
