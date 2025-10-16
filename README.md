@@ -12,9 +12,9 @@ I estimated π by Monte Carlo sampling of 100 million random points inside the u
 
 | Implementation | Time (s) | π Estimate | Speedup |
 |----------------|-----------|-------------|----------|
-| Pure Python    | 11.6      | 3.14146184     | 1×       |
-| C via ctypes   | 1.09      | 3.14147804     | ~10×     |
-| NumPy          | 2.2       | 3.14171724     | ~5×     |
+| Pure Python    | 18.3      | 3.14168584  | 1×       |
+| C via ctypes   | 1.21      | 3.1416768.  | ~15×     |
+| NumPy          | 2.13      | 3.14160354  | ~8×      |
 
 ### Speed-Up Strategy
 
@@ -25,5 +25,16 @@ I estimated π by Monte Carlo sampling of 100 million random points inside the u
 ### Conclusion
 
 The NumPy implementation demonstrates that Python can speed up performance when vectorized operations replace explicit loops. 
+
+
+#C to python project 2b
+-Update for mylib.h
+-Update for mylib.cpp
+-If a “file not found” error appears, run make first to build the shared library.
+
+#cppyy project 3a
+-Update for mycpplib.h
+-Update for mycpplib.cpp
+-If a “file not found” error appears, run make first to build the shared library.
 
   
